@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xjd.mvplearntakeout.ui.activity.MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/main_content">
+
+    </FrameLayout>
+   <LinearLayout
+       android:id="@+id/main_common_bar"
+       android:layout_width="match_parent"
+       android:layout_weight="0"
+       android:layout_height="50dp">
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:src="@drawable/main_home_selector"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_height="20dp"
+                android:textColor="@color/main_bottom_text_selector"
+                android:text="@string/home"/>
+        </FrameLayout>
+       <FrameLayout
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="match_parent">
+           <ImageView
+               android:src="@drawable/main_order_selector"
+               android:layout_width="match_parent"
+               android:layout_height="30dp" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_gravity="bottom|center_horizontal"
+               android:layout_height="20dp"
+               android:textColor="@color/main_bottom_text_selector"
+               android:text="@string/order"/>
+       </FrameLayout>
+       <FrameLayout
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="match_parent">
+           <ImageView
+               android:src="@drawable/main_user_selector"
+               android:layout_width="match_parent"
+               android:layout_height="30dp" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_gravity="bottom|center_horizontal"
+               android:layout_height="20dp"
+               android:textColor="@color/main_bottom_text_selector"
+               android:text="@string/user"/>
+       </FrameLayout>
+       <FrameLayout
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="match_parent">
+           <ImageView
+               android:src="@drawable/main_more_selector"
+               android:layout_width="match_parent"
+               android:layout_height="30dp" />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_gravity="bottom|center_horizontal"
+               android:layout_height="20dp"
+               android:textColor="@color/main_bottom_text_selector"
+               android:text="@string/more"/>
+       </FrameLayout>
+
+
+   </LinearLayout>
+
+
+</LinearLayout>
