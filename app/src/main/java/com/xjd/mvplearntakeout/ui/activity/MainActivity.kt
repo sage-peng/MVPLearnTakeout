@@ -1,8 +1,10 @@
 package com.xjd.mvplearntakeout.ui.activity
 
 import android.app.Fragment
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import com.xjd.mvplearntakeout.R
@@ -10,6 +12,7 @@ import com.xjd.mvplearntakeout.ui.fragment.HomeFragment
 import com.xjd.mvplearntakeout.ui.fragment.MoreFragment
 import com.xjd.mvplearntakeout.ui.fragment.OrderFragment
 import com.xjd.mvplearntakeout.ui.fragment.UserFragment
+import com.xjd.mvplearntakeout.utils.BarUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,9 +20,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (BarUtils.checkDeviceHasNavigationBar(this)){
+            main_common_bar.setPadding(0,0,0,50.dp2px())
+        }
         changeIndex(0)
         initBottomBar()
     }
+
+    fun Int.dp2px(): Int {
+        return  TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toFloat(),resources.displayMetrics).toInt()
+
+    }
+
 
     private fun initBottomBar() {
         for (i in 0 until main_common_bar.childCount) {

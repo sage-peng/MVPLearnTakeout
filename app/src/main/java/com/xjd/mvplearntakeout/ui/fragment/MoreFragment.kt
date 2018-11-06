@@ -16,7 +16,7 @@ class MoreFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = View.inflate(activity, R.layout.fragment_, null)
+        val view = View.inflate(activity, R.layout.fragment_home, null)
         view.findViewById<TextView>(R.id.text).text="个人1"
         return view
     }
