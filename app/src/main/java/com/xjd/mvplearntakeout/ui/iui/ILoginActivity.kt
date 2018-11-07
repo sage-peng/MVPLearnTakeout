@@ -9,4 +9,5 @@ import com.xjd.mvplearntakeout.model.bean.User
 interface ILoginActivity{
     fun onLoginFailed()
     fun onLoginSuccess(user: User)
+    fun getPhone():String
 }
