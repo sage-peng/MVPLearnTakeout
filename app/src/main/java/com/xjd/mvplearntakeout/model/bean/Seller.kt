@@ -11,7 +11,7 @@ class Seller {
     var pic: String? = null
     var name: String? = null
 
-    var score: String? = null
+    var score: String = ""
     var sale: String? = null
     var ensure: String? = null
 
