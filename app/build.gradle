@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-//apply plugin: 'com.neenbedankt.android-apt'
-
 apply plugin: 'kotlin-kapt'
+
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 26
@@ -49,9 +49,14 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.6'
     compile 'com.google.dagger:dagger:2.6'
 
+    compile 'com.j256.ormlite:ormlite-android:5.0'
+    compile 'com.j256.ormlite:ormlite-core:5.0'
 
 }
 
-kapt {
-    generateStubs = true
+MobSDK {
+    appKey "28a58e0ccda08"
+    appSecret "a6912d986c6cffa1ef82c215a19f313d"
+
+    SMSSDK {}
 }

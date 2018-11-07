@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBottomBar() {
         for (i in 0 until main_common_bar.childCount) {
-            main_common_bar.getChildAt(i).setOnClickListener(
-                    { view -> changeIndex(i) }
-            )
+            main_common_bar.getChildAt(i).setOnClickListener {  changeIndex(i) }
         }
     }
 

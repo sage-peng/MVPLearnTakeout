@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.dagger.component.DaggerHomeFragmentComponet
+import com.xjd.mvplearntakeout.dagger.component.HomeFragmentComponet
 import com.xjd.mvplearntakeout.dagger.module.HomeFragmentMoudle
 import com.xjd.mvplearntakeout.model.bean.Seller
 import com.xjd.mvplearntakeout.presenter.HomeFragmentPresenter
@@ -24,8 +25,6 @@ import javax.inject.Inject
  */
 
 class HomeFragment : Fragment(), IHomeFragment {
-
-
 
     //声明成员变量的时候可以懒加载
 
@@ -42,7 +41,6 @@ class HomeFragment : Fragment(), IHomeFragment {
         DaggerHomeFragmentComponet.builder()
                 .homeFragmentMoudle(HomeFragmentMoudle(this)).build()
                 .inject(this)
-
         rv_home = view.findViewById<RecyclerView>(R.id.rv_home)
         rv_home.layoutManager = LinearLayoutManager(activity)
         homeRvAdapter = HomeRvAdapter(activity)
