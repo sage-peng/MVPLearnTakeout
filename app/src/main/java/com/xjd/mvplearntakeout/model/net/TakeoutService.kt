@@ -20,6 +20,9 @@ interface TakeoutService {
     @GET("order")
     fun getListInfo(@Query("id")id: String): Call<ResponseInfo>
 
+    @GET("business")
+    fun getBusinessInfo (@Query("sellerId")sellerId: String): Call<ResponseInfo>
+
 
 
 }

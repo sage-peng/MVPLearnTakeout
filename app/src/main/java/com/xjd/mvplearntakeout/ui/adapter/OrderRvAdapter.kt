@@ -6,27 +6,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.heima.takeout.utils.OrderObservable
 import com.mob.wrappers.PaySDKWrapper
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.R.string.order
 import com.xjd.mvplearntakeout.model.bean.Order
 import org.jetbrains.anko.find
+import org.json.JSONObject
+import java.util.*
 
 /**
  * Created by Administrator on 2018-11-09.
  */
 
-class OrderRvAdapter(val context:Context):RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-    private var orders:List<Order> = ArrayList<Order>()
+class OrderRvAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Observer {
+    init {
+        OrderObservable.instance.addObserver(this)
+    }
+    override fun update(o: Observable?, arg: Any?) {
+        val json = arg as String
+        val jsonObject = JSONObject(json)
+        val id = jsonObject.getString("id")
 
-    fun setData(orders:List<Order>){
-        this.orders=orders
+        val pushType = jsonObject.getString("type")
+        for (order in orders){
+            if (order.id!!.equals(id)){
+                order.type=pushType
+                notifyItemChanged(orders.indexOf(order))
+                break
+            }
+        }
+
+    }
+
+    private var orders: List<Order> = ArrayList<Order>()
+
+    fun setData(orders: List<Order>) {
+        this.orders = orders
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-       return orders.size
+        return orders.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
@@ -34,7 +57,7 @@ class OrderRvAdapter(val context:Context):RecyclerView.Adapter<RecyclerView.View
         // 那么是安装unspeciay的模式，那么按最小的填充会填充不满
         //val item = View.inflate(context, R.layout.item_order_item, null)
         //应该这样填充
-           val item = LayoutInflater.from(context).inflate(R.layout.item_order_item, parent, false)
+        val item = LayoutInflater.from(context).inflate(R.layout.item_order_item, parent, false)
         return OrderViewHolder(item)
     }
 
@@ -46,6 +69,7 @@ class OrderRvAdapter(val context:Context):RecyclerView.Adapter<RecyclerView.View
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvSellerName: TextView
         val tvOrderType: TextView
+
         init {
             tvSellerName = itemView.find(R.id.tv_order_item_seller_name)
             tvOrderType = itemView.find(R.id.tv_order_item_type) //订单状态

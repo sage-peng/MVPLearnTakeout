@@ -1,6 +1,7 @@
 package com.xjd.mvplearntakeout.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView
 import com.squareup.picasso.Picasso
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.model.bean.Seller
+import com.xjd.mvplearntakeout.ui.activity.BusinessActivity
 import org.jetbrains.anko.find
 
 /**
@@ -114,6 +116,11 @@ class HomeRvAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
             tvSale = item.find(R.id.tv_home_sale)
             tvSendPrice = item.find(R.id.tv_home_send_price)
             tvDistance = item.find(R.id.tv_home_distance)
+
+            item.setOnClickListener {
+                val intent = Intent(context, BusinessActivity::class.java)
+                context.startActivity(intent)
+            }
         }
 
         fun bindData(seller: Seller) {

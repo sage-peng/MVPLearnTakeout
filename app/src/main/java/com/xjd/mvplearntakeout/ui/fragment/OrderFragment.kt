@@ -86,7 +86,4 @@ class OrderFragment : Fragment(), IOrderFragment {
         orderRvAdapter.setData(orders)
         swipesRefreshLayout.isRefreshing=false
     }
-
-
-
 }

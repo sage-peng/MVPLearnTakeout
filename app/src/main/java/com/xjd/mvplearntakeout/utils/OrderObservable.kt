@@ -5,10 +5,10 @@ import java.util.*
 /**
  * 订单状态被观察者
  */
-class OrderObservable  {
+class OrderObservable :Observable() {
     companion object {
 
-
+        val instance =OrderObservable()
         /* 订单状态
        * 1 未支付 2 已提交订单 3 商家接单  4 配送中,等待送达 5已送达 6 取消的订单*/
         val ORDERTYPE_UNPAYMENT = "10"
@@ -22,6 +22,11 @@ class OrderObservable  {
 
         val ORDERTYPE_SERVED = "50"
         val ORDERTYPE_CANCELLEDORDER = "60"
+    }
+
+    fun newInstance(msg :String){
+        setChanged()//设置标记
+        instance.notifyObservers(msg)//通知
     }
 
 

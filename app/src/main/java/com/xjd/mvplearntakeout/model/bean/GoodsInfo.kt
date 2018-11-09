@@ -12,6 +12,11 @@ class GoodsInfo {
     var oldPrice: Int = 0//原价
     var sellerId: Int = 0
 
+    var typeId: Int = 0
+    var typeName: String?=null
+    var count: Int =0
+
+
     constructor() : super() {}
 
     constructor(sellerId: Int, id: Int, name: String, icon: String, form: String, monthSaleNum: Int, bargainPrice: Boolean,
