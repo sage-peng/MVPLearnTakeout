@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.dagger.component.DaggerHomeFragmentComponet
-import com.xjd.mvplearntakeout.dagger.component.HomeFragmentComponet
+import com.xjd.mvplearntakeout.dagger.component.DaggerLoginActivityComponet
 import com.xjd.mvplearntakeout.dagger.module.HomeFragmentMoudle
 import com.xjd.mvplearntakeout.model.bean.Seller
 import com.xjd.mvplearntakeout.presenter.HomeFragmentPresenter

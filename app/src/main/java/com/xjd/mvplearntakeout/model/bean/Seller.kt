@@ -9,7 +9,7 @@ import android.content.pm.ActivityInfo
 class Seller {
     var id: Long = 0
     var pic: String? = null
-    var name: String? = null
+    var name: String = ""
 
     var score: String = ""
     var sale: String? = null

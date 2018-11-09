@@ -2,8 +2,10 @@ package com.xjd.mvplearntakeout.utils
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import com.mob.MobApplication
 import com.mob.MobSDK
+import com.xjd.mvplearntakeout.model.Dao.TakeOutOpenHelper
 import com.xjd.mvplearntakeout.model.bean.User
 
 /**
@@ -21,5 +23,8 @@ class TakeOutApp : MobApplication() {
         user.id=-1
         MobSDK.init(this)
     }
+
+
+
 
 }

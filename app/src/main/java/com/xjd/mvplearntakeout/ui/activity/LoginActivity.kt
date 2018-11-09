@@ -34,16 +34,19 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
 
     @Inject
     lateinit var loginActivityPresenter: LoginActivityPresenter
-
+    var timeTask: TimeTask? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+//        loginActivityPresenter = LoginActivityPresenter(this)
         DaggerLoginActivityComponet.builder().loginActivityMoudle(LoginActivityMoudle(this)).build().inject(this)
         SMSSDK.registerEventHandler(loginActivityPresenter.eh)
 
         initlister()
     }
+
+
 
     private fun initlister() {
         iv_user_back.setOnClickListener { finish() }
@@ -53,7 +56,7 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
 //                SMSSDK.getVerificationCode("86", phone)
 
                 tv_user_code.isEnabled = false
-                var timeTask = TimeTask()
+                timeTask = TimeTask()
                 Thread(timeTask).start()
             }
         }
@@ -62,8 +65,9 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
             val code = et_user_code.text.toString().trim()
             if (SMSUtil.judgePhoneNums(this, phone) && !TextUtils.isEmpty(code)) {
 //                SMSSDK.submitVerificationCode("86", phone, code)
-                loginActivityPresenter.loginByphone(phone)
+//                loginActivityPresenter.loginByphone(phone)
             }
+            loginActivityPresenter.loginByphone(phone)
         }
     }
 
@@ -104,6 +108,10 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
 
     override fun onDestroy() {
         super.onDestroy()
+        if (timeTask!=null){
+            handle.removeCallbacks(timeTask)
+        }
+
         SMSSDK.unregisterEventHandler(loginActivityPresenter.eh)
     }
 

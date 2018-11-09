@@ -8,6 +8,7 @@ import dagger.Component
  * Created by Administrator on 2018-11-07.
  */
 
-@Component(modules = arrayOf(HomeFragmentMoudle::class)) interface HomeFragmentComponet{
+@Component(modules = arrayOf(HomeFragmentMoudle::class))
+interface HomeFragmentComponet{
     fun inject(homeFragment: HomeFragment)
 }

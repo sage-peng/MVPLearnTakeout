@@ -17,5 +17,9 @@ interface TakeoutService {
     @GET("login")
     fun loginByphone(@Query("phone")phone: String): Call<ResponseInfo>
 
+    @GET("order")
+    fun getListInfo(@Query("id")id: String): Call<ResponseInfo>
+
+
 
 }
