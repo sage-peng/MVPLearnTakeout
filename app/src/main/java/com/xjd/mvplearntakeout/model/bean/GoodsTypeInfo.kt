@@ -5,7 +5,7 @@ class GoodsTypeInfo {
     var name: String=""//商品类型名称
     var info: String=""//特价信息
     var list: List<GoodsInfo> = listOf()//商品列表
-
+    var redDotCount: Int = 0
     constructor() : super() {}
     constructor(id: Int, name: String, info: String, list: List<GoodsInfo>) : super() {
         this.id = id

@@ -3,6 +3,7 @@ package com.xjd.mvplearntakeout.ui.activity
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageButton
 
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.ui.adapter.GoodsVpAdapter
@@ -32,4 +33,20 @@ class BusinessActivity: AppCompatActivity() {
         vp.adapter=goodsVpAdapter
         tabs.setupWithViewPager(vp)
     }
+
+    fun addImagebutton(ib: ImageButton, width: Int, height: Int) {
+        fl_Container.addView(ib,width,height)
+    }
+
+    fun getDestinationCartLocation(): IntArray {
+        var desLoc=IntArray(2)
+        imgCart.getLocationInWindow(desLoc)
+        return desLoc
+    }
+
+    fun removeImagebutton(ib: ImageButton) {
+        fl_Container.removeView(ib)
+    }
+
+
 }

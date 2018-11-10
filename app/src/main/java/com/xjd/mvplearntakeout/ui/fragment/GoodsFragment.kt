@@ -46,23 +46,30 @@ class GoodsFragment :Fragment(){
 
     lateinit var rvGoodsTypeAdapter: RvGoodsTypeAdapter
     lateinit var stickyAdapter: StickyAdapter
-    private fun initView() {
-        val rvGoodsType = goodsView.find<RecyclerView>(R.id.rv_goods_type)
 
+    lateinit var rvGoodsType: RecyclerView
+    lateinit var slhGoodslist: StickyListHeadersListView
+    private fun initView() {
+        rvGoodsType = goodsView.find<RecyclerView>(R.id.rv_goods_type)
+
+        //左边列表
         rvGoodsType.layoutManager=LinearLayoutManager(activity)
         rvGoodsTypeAdapter = RvGoodsTypeAdapter(activity)
         rvGoodsType.adapter=rvGoodsTypeAdapter
 
 
-        val slhGoodslist = goodsView.find<StickyListHeadersListView>(R.id.slhlv)
-//        stickyAdapter = StickyAdapter(activity)
-//        slhGoodslist.adapter=stickyAdapter
+        //右边列表
+        slhGoodslist = goodsView.find<StickyListHeadersListView>(R.id.slhlv)
+        stickyAdapter = StickyAdapter(activity)
+        slhGoodslist.adapter=stickyAdapter
 
     }
 
     fun ongoodsSuccess(goodsTypeList: List<GoodsTypeInfo>, goodslist: ArrayList<GoodsInfo>) {
         rvGoodsTypeAdapter.setData(goodsTypeList)
-//        stickyAdapter.setData(goodslist)
+        stickyAdapter.setData(goodslist)
+        //元素传给prasenter，处理左右联动的业务逻辑
+        goodsFragmentPresenter.proceessLink(rvGoodsType,rvGoodsTypeAdapter,slhGoodslist,stickyAdapter)
     }
 
 
