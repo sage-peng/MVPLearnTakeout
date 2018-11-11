@@ -4,10 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.xjd.mvplearntakeout.model.bean.Order
-import com.xjd.mvplearntakeout.model.bean.Seller
 import com.xjd.mvplearntakeout.ui.fragment.OrderFragment
-import com.xjd.mvplearntakeout.ui.iui.IHomeFragment
-import org.json.JSONObject
 
 /**
  * Created by Administrator on 2018-11-07.

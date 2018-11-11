@@ -10,18 +10,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.xjd.mvplearntakeout.R
+import com.xjd.mvplearntakeout.dagger.component.DaggerGoodsFragmentComponent
+import com.xjd.mvplearntakeout.dagger.module.GoodsFragmentMoudle
 import com.xjd.mvplearntakeout.model.bean.GoodsTypeInfo
 import com.xjd.mvplearntakeout.presenter.GoodsFragmentPresenter
 import com.xjd.mvplearntakeout.ui.activity.BusinessActivity
 import com.xjd.mvplearntakeout.ui.fragment.GoodsFragment
 import org.jetbrains.anko.find
+import javax.inject.Inject
 
 /**
  * Created by Administrator on 2018-11-09.
  */
 class RvGoodsTypeAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var goodsFragmentPresenter: GoodsFragmentPresenter
+
+
+    @Inject
+    lateinit var goodsFragmentPresenter: GoodsFragmentPresenter
     init {
+
+
         val goodsfragment: GoodsFragment = (context as BusinessActivity).fragments.get(0) as GoodsFragment
         goodsFragmentPresenter = goodsfragment.goodsFragmentPresenter
     }
@@ -78,8 +86,8 @@ class RvGoodsTypeAdapter(val context: Context) : RecyclerView.Adapter<RecyclerVi
             redDotCount = itemView.find<TextView>(R.id.tvRedDotCount)
             type = itemView.find<TextView>(R.id.type)
             //左边itemView的点击事件
-            itemView.setOnClickListener {
 
+            itemView.setOnClickListener {
                 //不是客户点的
                 goodsFragmentPresenter.isCustomScroll = false
                 currentSelectItem = mPosition

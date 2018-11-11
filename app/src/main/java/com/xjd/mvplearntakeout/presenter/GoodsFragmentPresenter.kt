@@ -4,7 +4,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.AbsListView
-import android.widget.LinearLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.xjd.mvplearntakeout.model.bean.GoodsInfo

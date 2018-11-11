@@ -3,7 +3,9 @@ package com.xjd.mvplearntakeout.ui.activity
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.ImageButton
+import com.heima.takeout.utils.PriceFormater
 
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.ui.adapter.GoodsVpAdapter
@@ -48,5 +50,22 @@ class BusinessActivity: AppCompatActivity() {
         fl_Container.removeView(ib)
     }
 
+    fun upDateCart() {
+        var count=0
+        var totalprice=0f
+        for (goodsInfo in (fragments[0] as GoodsFragment).stickyAdapter.goodsList) {
+            if (goodsInfo.count>0) {
+                count+=goodsInfo.count
+                totalprice+=goodsInfo.newPrice!!.toFloat()*goodsInfo.count.toFloat()
+            }
+        }
 
+        if (count>0){
+            tvSelectNum.visibility=View.VISIBLE
+        }else{
+            tvSelectNum.visibility=View.GONE
+        }
+        tvSelectNum.text=count.toString()
+        tvCountPrice.text=PriceFormater.format(totalprice)
+    }
 }

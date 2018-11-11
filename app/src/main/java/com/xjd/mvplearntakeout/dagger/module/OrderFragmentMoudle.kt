@@ -1,8 +1,6 @@
 package com.xjd.mvplearntakeout.dagger.module
 
-import com.xjd.mvplearntakeout.presenter.LoginActivityPresenter
 import com.xjd.mvplearntakeout.presenter.OrderFragmentPresenter
-import com.xjd.mvplearntakeout.ui.activity.LoginActivity
 import com.xjd.mvplearntakeout.ui.fragment.OrderFragment
 import dagger.Module
 import dagger.Provides

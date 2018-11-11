@@ -102,6 +102,8 @@ open class StickyAdapter(val context: Context) : BaseAdapter(), StickyListHeader
                 R.id.ib_add -> doAdd()
                 R.id.ib_minus -> dominus()
             }
+            //通知更新购物车
+            (context as BusinessActivity).upDateCart()
 
         }
 

@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 import com.xjd.mvplearntakeout.R.id.tv_user_code
+import com.xjd.mvplearntakeout.dagger.component.DaggerHomeFragmentComponet
 
 
 /**

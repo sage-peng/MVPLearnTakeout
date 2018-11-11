@@ -25,7 +25,7 @@ import javax.inject.Inject
  * Created by Administrator on 2018-11-09.
  */
 
-class GoodsFragment :Fragment(){
+class GoodsFragment :Fragment() {
 
     @Inject
     lateinit var goodsFragmentPresenter:GoodsFragmentPresenter

@@ -7,6 +7,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.mob.sdk'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '840322'
+            storeFile file('F:/Android/sage.jks')
+            storePassword '840322'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.xjd.mvplearntakeout"
@@ -18,8 +26,14 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     sourceSets {

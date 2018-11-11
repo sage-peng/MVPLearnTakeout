@@ -18,6 +18,7 @@ import com.xjd.mvplearntakeout.presenter.HomeFragmentPresenter
 import com.xjd.mvplearntakeout.ui.adapter.HomeRvAdapter
 import com.xjd.mvplearntakeout.ui.iui.IHomeFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -32,8 +33,9 @@ class HomeFragment : Fragment(), IHomeFragment {
     var mDatas: ArrayList<Seller> = ArrayList()
     lateinit var homeRvAdapter: HomeRvAdapter
 
+
     @Inject
-    lateinit var homeFragmentPresenter:HomeFragmentPresenter
+    lateinit var homeFragmentPresenter: HomeFragmentPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = View.inflate(activity, R.layout.fragment_home, null)
@@ -47,6 +49,8 @@ class HomeFragment : Fragment(), IHomeFragment {
         rv_home.adapter = homeRvAdapter
         initData()
         initListener();
+        //需要重置
+        sum = 0
         return view
     }
 
@@ -65,7 +69,7 @@ class HomeFragment : Fragment(), IHomeFragment {
                     alpha = 255
 
                 } else {
-                    alpha = (255-0x55)* sum / distance + 0x55
+                    alpha = (255 - 0x55) * sum / distance + 0x55
 
                 }
                 Log.e("HomeRV", "distance is ${sum} alpha is  ${alpha}")
