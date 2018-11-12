@@ -1,6 +1,7 @@
 package com.xjd.mvplearntakeout.ui.activity
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -40,12 +41,18 @@ class AddOrEditAddressActivity : AppCompatActivity(), View.OnClickListener {
                     insertOrUpdateAdderssToDb()
                 }
             }
+            R.id.btn_location_address->{
+                val intent = Intent(this, MapLocationActivity::class.java)
+                startActivityForResult(intent, 1001)
+            }
         }
     }
 
-    private fun updateAdderssToDb() {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode==200){
 
-
+        }
     }
 
     private fun insertOrUpdateAdderssToDb() {
