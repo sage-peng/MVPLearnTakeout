@@ -11,8 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.ui.activity.LoginActivity
-import com.xjd.mvplearntakeout.utils.TakeOutApp
-import kotlinx.android.synthetic.main.fragment_user.*
+import com.xjd.mvplearntakeout.appconfig.TakeOutApp
 import org.jetbrains.anko.find
 
 /**

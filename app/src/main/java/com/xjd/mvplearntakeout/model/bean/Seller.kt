@@ -1,12 +1,14 @@
 package com.xjd.mvplearntakeout.model.bean
 
 import android.content.pm.ActivityInfo
+import android.os.Parcel
+import android.os.Parcelable
 
 /**
  * Created by Administrator on 2018-11-06.
  */
 
-class Seller {
+class Seller() : Parcelable {
     var id: Long = 0
     var pic: String? = null
     var name: String = ""
@@ -26,5 +28,51 @@ class Seller {
     var icon: String? = null
 
     var activityList: ArrayList<ActivityInfo>? = null
+
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readLong()
+        pic = parcel.readString()
+        name = parcel.readString()
+        score = parcel.readString()
+        sale = parcel.readString()
+        ensure = parcel.readString()
+        invoice = parcel.readString()
+        sendPrice = parcel.readString()
+        deliveryFee = parcel.readString()
+        recentVisit = parcel.readString()
+        distance = parcel.readString()
+        time = parcel.readString()
+        icon = parcel.readString()
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeLong(id)
+        parcel.writeString(pic)
+        parcel.writeString(name)
+        parcel.writeString(score)
+        parcel.writeString(sale)
+        parcel.writeString(ensure)
+        parcel.writeString(invoice)
+        parcel.writeString(sendPrice)
+        parcel.writeString(deliveryFee)
+        parcel.writeString(recentVisit)
+        parcel.writeString(distance)
+        parcel.writeString(time)
+        parcel.writeString(icon)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Seller> {
+        override fun createFromParcel(parcel: Parcel): Seller {
+            return Seller(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Seller?> {
+            return arrayOfNulls(size)
+        }
+    }
 
 }

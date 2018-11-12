@@ -10,8 +10,7 @@ import com.j256.ormlite.dao.Dao
 import com.xjd.mvplearntakeout.model.Dao.TakeOutOpenHelper
 import com.xjd.mvplearntakeout.model.bean.User
 import com.xjd.mvplearntakeout.ui.iui.ILoginActivity
-import com.xjd.mvplearntakeout.utils.TakeOutApp
-import kotlinx.android.synthetic.main.activity_login.*
+import com.xjd.mvplearntakeout.appconfig.TakeOutApp
 import java.lang.Exception
 import java.sql.Savepoint
 

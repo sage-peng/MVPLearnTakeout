@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.xjd.mvplearntakeout.model.bean.GoodsInfo
 import com.xjd.mvplearntakeout.model.bean.GoodsTypeInfo
+import com.xjd.mvplearntakeout.ui.activity.BusinessActivity
 import com.xjd.mvplearntakeout.ui.adapter.RvGoodsTypeAdapter
 import com.xjd.mvplearntakeout.ui.adapter.StickyAdapter
 import com.xjd.mvplearntakeout.ui.fragment.GoodsFragment
@@ -101,9 +102,31 @@ class GoodsFragmentPresenter(val goodsFragment: GoodsFragment) : BasePresenter()
     fun showTypeSelect(currentSelectItem: Int) {
         val firstVisibleItemPosition = (rvGoodsType.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
         val lastVisibleItemPosition = (rvGoodsType.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-        if (currentSelectItem<firstVisibleItemPosition||currentSelectItem>lastVisibleItemPosition){
+        if (currentSelectItem < firstVisibleItemPosition || currentSelectItem > lastVisibleItemPosition) {
             rvGoodsType.scrollToPosition(currentSelectItem)
         }
+    }
+
+    //清空购物车
+    fun clearAll() {
+        //清空所有红点
+        for (goodsTypeInfo in rvGoodsTypeAdapter.goodsTypeList) {
+            goodsTypeInfo.redDotCount = 0
+        }
+        rvGoodsTypeAdapter.notifyDataSetChanged()
+        //刷新右侧
+        for (goodsInfo in stickyAdapter.goodsList) {
+            goodsInfo.count=0
+        }
+        stickyAdapter.notifyDataSetChanged()
+
+       //刷新购物车
+        (goodsFragment.activity as BusinessActivity).upDateCart()
+        (goodsFragment.activity as BusinessActivity).showOrHideCart()
+
+
+        //清空缓存
+//        TakeoutApp.sInstance.clearCacheSelectedInfo(seller.id.toInt())
     }
 
 }

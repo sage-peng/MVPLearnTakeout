@@ -1,27 +1,34 @@
-package com.xjd.mvplearntakeout.utils
+package com.xjd.mvplearntakeout.appconfig
 
-import android.annotation.SuppressLint
-import android.app.Application
-import android.content.Context
 import cn.jpush.android.api.JPushInterface
 import com.mob.MobApplication
 import com.mob.MobSDK
-import com.xjd.mvplearntakeout.model.Dao.TakeOutOpenHelper
+import com.xjd.mvplearntakeout.model.bean.CacheSelectedInfo
 import com.xjd.mvplearntakeout.model.bean.User
+import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * Created by Administrator on 2018-11-07.
  */
 
 class TakeOutApp : MobApplication() {
+    var cacheSelectedInfolist: CopyOnWriteArrayList<CacheSelectedInfo> = CopyOnWriteArrayList()
 
     companion object {
-        var user:User= User()
+        var user: User = User()
+        lateinit var instance: TakeOutApp
+
     }
+
+    init {
+        instance = TakeOutApp()
+    }
+
+
 
     override fun onCreate() {
         super.onCreate()
-        user.id=-1
+        user.id = -1
         //短信登录
         MobSDK.init(this)
 
@@ -29,8 +36,6 @@ class TakeOutApp : MobApplication() {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
     }
-
-
 
 
 }

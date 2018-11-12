@@ -12,8 +12,10 @@ import com.daimajia.slider.library.SliderLayout
 import com.daimajia.slider.library.SliderTypes.TextSliderView
 import com.squareup.picasso.Picasso
 import com.xjd.mvplearntakeout.R
+import com.xjd.mvplearntakeout.model.bean.CacheSelectedInfo
 import com.xjd.mvplearntakeout.model.bean.Seller
 import com.xjd.mvplearntakeout.ui.activity.BusinessActivity
+import com.xjd.mvplearntakeout.utils.CacheSelectedInfoUtils
 import org.jetbrains.anko.find
 
 /**
@@ -119,6 +121,13 @@ class HomeRvAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
 
             item.setOnClickListener {
                 val intent = Intent(context, BusinessActivity::class.java)
+                var hasSelectInfo=false
+                val count = CacheSelectedInfoUtils.queryCacheSelectedInfoBySellerId(mSeller.id.toInt())
+                if (count>0){
+                    hasSelectInfo=true
+                }
+                intent.putExtra("hasSelectInfo",hasSelectInfo)
+                intent.putExtra("seller",mSeller)
                 context.startActivity(intent)
             }
         }

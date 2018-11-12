@@ -40,6 +40,8 @@ open class StickyAdapter(val context: Context) : BaseAdapter(), StickyListHeader
     var goodsList: List<GoodsInfo> = listOf()
     var goodsFragmentPresenter: GoodsFragmentPresenter
 
+
+
     init {
         val goodsfragment: GoodsFragment = (context as BusinessActivity).fragments.get(0) as GoodsFragment
         goodsFragmentPresenter = goodsfragment.goodsFragmentPresenter
