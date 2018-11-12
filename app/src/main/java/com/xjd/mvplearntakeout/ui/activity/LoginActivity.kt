@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
         tv_user_code.setOnClickListener {
             val phone = et_user_phone.text.toString().trim()
             if (SMSUtil.judgePhoneNums(this, phone)) {
-//                SMSSDK.getVerificationCode("86", phone)
+                SMSSDK.getVerificationCode("86", phone)
 
                 tv_user_code.isEnabled = false
                 timeTask = TimeTask()
@@ -76,11 +76,11 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
         login.setOnClickListener {
             val phone = et_user_phone.text.toString().trim()
             val code = et_user_code.text.toString().trim()
-//            if (SMSUtil.judgePhoneNums(this, phone) && !TextUtils.isEmpty(code)) {
-//                SMSSDK.submitVerificationCode("86", phone, code)
+            if (SMSUtil.judgePhoneNums(this, phone) && !TextUtils.isEmpty(code)) {
+                SMSSDK.submitVerificationCode("86", phone, code)
 //                loginActivityPresenter.loginByphone(phone)
-//            }
-            loginActivityPresenter.loginByphone(phone)
+            }
+
         }
     }
 
