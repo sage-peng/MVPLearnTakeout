@@ -1,6 +1,7 @@
 package com.xjd.mvplearntakeout.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.mob.wrappers.PaySDKWrapper
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.R.string.order
 import com.xjd.mvplearntakeout.model.bean.Order
+import com.xjd.mvplearntakeout.ui.activity.OrderDetailActivity
 import org.jetbrains.anko.find
 import org.json.JSONObject
 import java.util.*
@@ -69,13 +71,21 @@ class OrderRvAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.V
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvSellerName: TextView
         val tvOrderType: TextView
-
+        lateinit var order:Order
         init {
             tvSellerName = itemView.find(R.id.tv_order_item_seller_name)
             tvOrderType = itemView.find(R.id.tv_order_item_type) //订单状态
+
+            itemView.setOnClickListener {
+                val intent: Intent =  Intent(context, OrderDetailActivity::class.java)
+                intent.putExtra("orderId", order.id)
+                intent.putExtra("type", order.type)
+                context.startActivity(intent)
+            }
         }
 
         fun bindView(order: Order) {
+            this.order = order
             tvSellerName.text = order.seller!!.name
             tvOrderType.text = getOrderTypeInfo(order.type)
         }

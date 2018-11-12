@@ -53,6 +53,7 @@
         </activity>
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.BusinessActivity" />
+        <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.MapLocationActivity" />
         <activity android:name=".ui.activity.ConfirmOrderActivity"></activity>
         <activity android:name=".ui.activity.AddOrEditAddressActivity">        </activity>
