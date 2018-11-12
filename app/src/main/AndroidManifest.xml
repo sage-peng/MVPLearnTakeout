@@ -33,6 +33,9 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <!--极光推送 end-->
 
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+
     <application
         android:name=".appconfig.TakeOutApp"
         android:allowBackup="true"
@@ -42,22 +45,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.MainActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.BusinessActivity" />
+        <activity android:name=".ui.activity.MapLocationActivity" />
         <activity android:name=".ui.activity.ConfirmOrderActivity"></activity>
-        <activity android:name=".ui.activity.AddOrEditAddressActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.activity.AddOrEditAddressActivity">        </activity>
         <activity android:name=".ui.activity.RecepitAddressActivity"></activity>
 
 
@@ -186,6 +184,13 @@
             android:name="JPUSH_APPKEY"
             android:value="db287a3204f84aca0a6d612d" />
         <!--极光推送 end-->
+
+        <!--高德地图 star-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1ce144ec07e61ddecb4d450562e4d953" />
+        <service android:name="com.amap.api.location.APSService"></service>
+        <!--高德地图 end-->
 
     </application>
 

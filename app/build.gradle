@@ -23,6 +23,11 @@ android {
         versionCode 2
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi-v7a"
+        }
     }
     buildTypes {
         release {
@@ -69,10 +74,12 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-core:5.0'
     implementation files('libs/jcore-android-1.2.6.jar')
     implementation files('libs/jpush-android-3.1.7.jar')
-
     compile 'com.flipboard:bottomsheet-commons:1.5.1'
     compile 'com.flipboard:bottomsheet-core:1.5.1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
+    implementation files('libs/Android_Map3D_SDK_V6.5.0_20180930.jar')
+    implementation files('libs/AMap_Search_V6.5.0_20180930.jar')
+    implementation files('libs/AMap_Location_V4.3.0_20181016.jar')
 }
 
 MobSDK {

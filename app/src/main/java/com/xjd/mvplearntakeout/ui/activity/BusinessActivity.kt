@@ -41,6 +41,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.bottom -> showOrHideCart()
+            R.id.ib_business_back ->finish()
             R.id.tvSubmit -> {
                 startActivity(Intent(this, ConfirmOrderActivity::class.java))
             }

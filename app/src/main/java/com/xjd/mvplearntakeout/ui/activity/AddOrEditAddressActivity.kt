@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
+import com.amap.api.services.core.PoiItem
 import com.heima.takeout.utils.SMSUtil
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.model.Dao.AddressDao
@@ -41,7 +42,7 @@ class AddOrEditAddressActivity : AppCompatActivity(), View.OnClickListener {
                     insertOrUpdateAdderssToDb()
                 }
             }
-            R.id.btn_location_address->{
+            R.id.btn_location_address -> {
                 val intent = Intent(this, MapLocationActivity::class.java)
                 startActivityForResult(intent, 1001)
             }
@@ -50,8 +51,11 @@ class AddOrEditAddressActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode==200){
-
+        if (resultCode == 200 && data!!.hasExtra("title")) {
+            val title = data.getStringExtra("title")
+            val address = data.getStringExtra("address")
+            et_receipt_address.setText(title)
+            et_detail_address.setText(address)
         }
     }
 
