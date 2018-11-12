@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (BarUtils.checkDeviceHasNavigationBar(this)) {
-            main_common_bar.setPadding(0, 0, 0, 50.dp2px())
+            main_container.setPadding(0, 0, 0, 50.dp2px())
         }
         changeIndex(0)
         initBottomBar()

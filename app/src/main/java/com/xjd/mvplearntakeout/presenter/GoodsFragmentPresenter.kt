@@ -6,12 +6,15 @@ import android.util.Log
 import android.widget.AbsListView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.xjd.mvplearntakeout.model.bean.CacheSelectedInfo
 import com.xjd.mvplearntakeout.model.bean.GoodsInfo
 import com.xjd.mvplearntakeout.model.bean.GoodsTypeInfo
+import com.xjd.mvplearntakeout.model.bean.Seller
 import com.xjd.mvplearntakeout.ui.activity.BusinessActivity
 import com.xjd.mvplearntakeout.ui.adapter.RvGoodsTypeAdapter
 import com.xjd.mvplearntakeout.ui.adapter.StickyAdapter
 import com.xjd.mvplearntakeout.ui.fragment.GoodsFragment
+import com.xjd.mvplearntakeout.utils.CacheSelectedInfoUtils
 import org.json.JSONObject
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView
 
@@ -32,10 +35,13 @@ class GoodsFragmentPresenter(val goodsFragment: GoodsFragment) : BasePresenter()
                     goodslist.add(good)
                 }
             }
+            //读取缓存处理回显
+            processShowCacheGoods(goodsTypeList, goodslist)
             goodsFragment.ongoodsSuccess(goodsTypeList, goodslist)
         }
 
     }
+
 
     fun getBusinessInfo(sellerId: String) {
         val businessCall = takeoutService.getBusinessInfo(sellerId)
@@ -127,6 +133,38 @@ class GoodsFragmentPresenter(val goodsFragment: GoodsFragment) : BasePresenter()
 
         //清空缓存
 //        TakeoutApp.sInstance.clearCacheSelectedInfo(seller.id.toInt())
+    }
+
+    //统一添加缓存
+    fun addGoodsCache(seller: Seller) {
+        //1.先清空
+        CacheSelectedInfoUtils.clearCacheSelectedInfo(seller.id.toInt())
+        //2.再添加
+        for (goodsInfo in goodsFragment.stickyAdapter.goodsList) {
+            if (goodsInfo.count > 0) {
+                val sellerId = seller.id  //田老师店
+                val typeId = goodsInfo.typeId   //粗粮主食
+                val goodsId = goodsInfo.id  //馒头
+                val count = goodsInfo.count     //馒头数量
+                CacheSelectedInfoUtils.addCacheSelectedInfo(CacheSelectedInfo(sellerId.toInt(), typeId, goodsId, count))
+            }
+        }
+    }
+
+    //读取缓存处理回显
+    private fun processShowCacheGoods(goodsTypeList: List<GoodsTypeInfo>, goodslist: ArrayList<GoodsInfo>) {
+        //1.处理商品：右侧，弹出框
+        for (goodInfo in goodslist) {
+            val cacheSelectedCount = CacheSelectedInfoUtils.queryCacheSelectedInfoByGoodsId(goodInfo.id)
+            if(cacheSelectedCount>0) goodInfo.count=cacheSelectedCount
+        }
+        //2.处理商品类型：左侧红点
+        for (goodTypeInfo in goodsTypeList) {
+            val queryCacheTypeCount = CacheSelectedInfoUtils.queryCacheSelectedInfoByTypeId(goodTypeInfo.id)
+            if(queryCacheTypeCount>0) goodTypeInfo.redDotCount=queryCacheTypeCount
+        }
+
+
     }
 
 }

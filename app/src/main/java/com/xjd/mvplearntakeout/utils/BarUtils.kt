@@ -1,6 +1,7 @@
 package com.xjd.mvplearntakeout.utils
 
 import android.content.Context
+import android.util.TypedValue
 
 /**
  * Created by Administrator on 2018-11-06.
@@ -29,6 +30,7 @@ object BarUtils{
         }
         return hasNavigationBar
     }
+
 
 }
 

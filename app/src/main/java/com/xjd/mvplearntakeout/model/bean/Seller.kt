@@ -3,12 +3,13 @@ package com.xjd.mvplearntakeout.model.bean
 import android.content.pm.ActivityInfo
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
 /**
  * Created by Administrator on 2018-11-06.
  */
 
-class Seller() : Parcelable {
+class Seller() : Serializable {
     var id: Long = 0
     var pic: String? = null
     var name: String = ""
@@ -45,25 +46,7 @@ class Seller() : Parcelable {
         icon = parcel.readString()
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeLong(id)
-        parcel.writeString(pic)
-        parcel.writeString(name)
-        parcel.writeString(score)
-        parcel.writeString(sale)
-        parcel.writeString(ensure)
-        parcel.writeString(invoice)
-        parcel.writeString(sendPrice)
-        parcel.writeString(deliveryFee)
-        parcel.writeString(recentVisit)
-        parcel.writeString(distance)
-        parcel.writeString(time)
-        parcel.writeString(icon)
-    }
 
-    override fun describeContents(): Int {
-        return 0
-    }
 
     companion object CREATOR : Parcelable.Creator<Seller> {
         override fun createFromParcel(parcel: Parcel): Seller {

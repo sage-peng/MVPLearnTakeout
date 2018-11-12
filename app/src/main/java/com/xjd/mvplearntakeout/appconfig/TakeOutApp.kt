@@ -20,15 +20,10 @@ class TakeOutApp : MobApplication() {
 
     }
 
-    init {
-        instance = TakeOutApp()
-    }
-
-
-
     override fun onCreate() {
         super.onCreate()
         user.id = -1
+        instance=this
         //短信登录
         MobSDK.init(this)
 

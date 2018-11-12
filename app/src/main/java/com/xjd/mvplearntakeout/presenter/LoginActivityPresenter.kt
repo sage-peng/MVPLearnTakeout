@@ -83,7 +83,7 @@ class LoginActivityPresenter(val loginActivity: ILoginActivity) : BasePresenter(
                 Log.e("LoginActivityPresenter", "事务正常")
                 loginActivity.onLoginSuccess(user)
             } catch (e: Exception) {
-                Log.e("LoginActivityPresenter", "事务异常")
+                Log.e("LoginActivityPresenter", "事务异常：${e.toString()}")
                 if (connection != null)
                     connection.rollback(savePoint)
             }

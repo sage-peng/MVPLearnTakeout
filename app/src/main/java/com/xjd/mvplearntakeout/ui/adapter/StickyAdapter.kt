@@ -49,6 +49,7 @@ open class StickyAdapter(val context: Context) : BaseAdapter(), StickyListHeader
 
     fun setData(goodsList: List<GoodsInfo>) {
         this.goodsList = goodsList
+        (context as BusinessActivity).upDateCart()
         notifyDataSetChanged()
     }
 

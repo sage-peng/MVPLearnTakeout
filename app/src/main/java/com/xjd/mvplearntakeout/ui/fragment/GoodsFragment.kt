@@ -14,6 +14,7 @@ import com.xjd.mvplearntakeout.dagger.module.GoodsFragmentMoudle
 import com.xjd.mvplearntakeout.model.bean.GoodsInfo
 import com.xjd.mvplearntakeout.model.bean.GoodsTypeInfo
 import com.xjd.mvplearntakeout.presenter.GoodsFragmentPresenter
+import com.xjd.mvplearntakeout.ui.activity.BusinessActivity
 import com.xjd.mvplearntakeout.ui.adapter.RvGoodsTypeAdapter
 import com.xjd.mvplearntakeout.ui.adapter.StickyAdapter
 import org.jetbrains.anko.find
@@ -36,7 +37,8 @@ class GoodsFragment :Fragment() {
         goodsView = LayoutInflater.from(activity).inflate(R.layout.fragment_goods, container, false)
 
         DaggerGoodsFragmentComponent.builder().goodsFragmentMoudle(GoodsFragmentMoudle(this)).build().inject(this)
-        goodsFragmentPresenter.getBusinessInfo("1")
+
+        goodsFragmentPresenter.getBusinessInfo((activity as BusinessActivity).seller.id.toString())
 
         initView()
 

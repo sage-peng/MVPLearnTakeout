@@ -3,10 +3,12 @@ package com.xjd.mvplearntakeout.ui.activity
 import android.app.AlertDialog
 import android.app.Fragment
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,12 +19,16 @@ import com.heima.takeout.utils.PriceFormater
 import com.xjd.mvplearntakeout.R
 import com.xjd.mvplearntakeout.model.bean.CacheSelectedInfo
 import com.xjd.mvplearntakeout.model.bean.GoodsInfo
+import com.xjd.mvplearntakeout.model.bean.Seller
 import com.xjd.mvplearntakeout.ui.adapter.CartRvAdapter
 import com.xjd.mvplearntakeout.ui.adapter.GoodsVpAdapter
 import com.xjd.mvplearntakeout.ui.fragment.CommentsFragmet
 import com.xjd.mvplearntakeout.ui.fragment.GoodsFragment
 import com.xjd.mvplearntakeout.ui.fragment.SellerFragment
+import com.xjd.mvplearntakeout.utils.BarUtils
+import com.xjd.mvplearntakeout.utils.CacheSelectedInfoUtils
 import kotlinx.android.synthetic.main.activity_business.*
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 
 /**
@@ -36,14 +42,13 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.bottom -> showOrHideCart()
             R.id.tvSubmit -> {
-
+                startActivity(Intent(this, ConfirmOrderActivity::class.java))
             }
         }
-
     }
 
 
-     fun showOrHideCart() {
+    fun showOrHideCart() {
 
 
         val rv = bottomSheetView!!.find<RecyclerView>(R.id.rvCart)
@@ -80,18 +85,32 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_business)
         initView()
         initListener()
+        initNaviBar()
         processIntent()
+    }
+
+    private fun initNaviBar() {
+        if (BarUtils.checkDeviceHasNavigationBar(this)) {
+            fl_Container.setPadding(0, 0, 0, 49.dp2px())
+        }
+    }
+    fun Int.dp2px(): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toFloat(), resources.displayMetrics).toInt()
+
     }
 
     /**
      *      intent.putExtra("hasSelectInfo",hasSelectInfo)
     intent.putExtra("seller",mSeller)
      */
-
+    var hasSelectInfo: Boolean = false
+    lateinit var seller: Seller
     private fun processIntent() {
-        if (intent.hasExtra("hasSelectInfo")){
-//            val hasSelectInfo = intent.getBooleanExtra("hasSelectInfo",false)
-//            intent.getSerializableExtra()
+        if (intent.hasExtra("hasSelectInfo")) {
+            hasSelectInfo = intent.getBooleanExtra("hasSelectInfo", false)
+            seller = intent.getSerializableExtra("seller") as Seller
+            tvDeliveryFee.text = "另需配送费${PriceFormater.format(seller.deliveryFee!!.toFloat())}"
+            tvSendPrice.text = PriceFormater.format(seller.sendPrice!!.toFloat())
         }
     }
 
@@ -108,18 +127,15 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener {
                     //开始清空购物车,把购物车中商品的数量重置为0
                     val goodsFragment: GoodsFragment = fragments.get(0) as GoodsFragment
                     goodsFragment.goodsFragmentPresenter.clearAll()
-
                 }
-
-
             })
             builder.setNegativeButton("不，我还要吃", object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-
-                }
+                override fun onClick(dialog: DialogInterface?, which: Int) {}
             })
             builder.show()
         }
+
+        tvSubmit.setOnClickListener(this)
     }
 
 
@@ -164,15 +180,31 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener {
         }
         tvSelectNum.text = count.toString()
         tvCountPrice.text = PriceFormater.format(totalprice)
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        for (goodsInfo in (fragments[0] as GoodsFragment).stickyAdapter.goodsList) {
-            if (goodsInfo.count > 0) {
-                CacheSelectedInfo()
-            }
+        if (totalprice > seller.sendPrice!!.toFloat()) {
+            tvSendPrice.visibility = View.GONE
+            tvSubmit.visibility = View.VISIBLE
+        } else {
+            tvSendPrice.visibility = View.VISIBLE
+            tvSubmit.visibility = View.GONE
         }
 
+
+    }
+
+    /**
+     * //    val  sellerId = 0  //田老师店
+    //    val userId = 38   //小明
+    //    val typeId = 0   //粗粮主食
+    //    val goodsId = 0  //馒头
+    //    val count = 0     //馒头数量
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (intent.hasExtra("hasSelectInfo")) {
+            //关闭时添加缓存
+            (fragments[0] as GoodsFragment).goodsFragmentPresenter.addGoodsCache(seller)
+        }
     }
 }

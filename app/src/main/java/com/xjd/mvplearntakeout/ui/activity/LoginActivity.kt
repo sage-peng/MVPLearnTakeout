@@ -12,6 +12,7 @@ import cn.smssdk.EventHandler
 import cn.smssdk.SMSSDK
 import com.xjd.mvplearntakeout.R
 import android.util.Log
+import android.util.TypedValue
 import com.heima.takeout.utils.SMSUtil
 import com.xjd.mvplearntakeout.dagger.component.DaggerLoginActivityComponet
 import com.xjd.mvplearntakeout.dagger.module.LoginActivityMoudle
@@ -24,6 +25,8 @@ import org.jetbrains.anko.toast
 import javax.inject.Inject
 import com.xjd.mvplearntakeout.R.id.tv_user_code
 import com.xjd.mvplearntakeout.dagger.component.DaggerHomeFragmentComponet
+import com.xjd.mvplearntakeout.utils.BarUtils
+import kotlinx.android.synthetic.main.activity_business.*
 
 
 /**
@@ -43,8 +46,17 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
 //        loginActivityPresenter = LoginActivityPresenter(this)
         DaggerLoginActivityComponet.builder().loginActivityMoudle(LoginActivityMoudle(this)).build().inject(this)
         SMSSDK.registerEventHandler(loginActivityPresenter.eh)
-
+        initNaviBar()
         initlister()
+    }
+    private fun initNaviBar() {
+        if (BarUtils.checkDeviceHasNavigationBar(this)) {
+            al_container.setPadding(0, 0, 0, 49.dp2px())
+        }
+    }
+    fun Int.dp2px(): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toFloat(), resources.displayMetrics).toInt()
+
     }
 
 
@@ -64,10 +76,10 @@ class LoginActivity : AppCompatActivity(), ILoginActivity {
         login.setOnClickListener {
             val phone = et_user_phone.text.toString().trim()
             val code = et_user_code.text.toString().trim()
-            if (SMSUtil.judgePhoneNums(this, phone) && !TextUtils.isEmpty(code)) {
+//            if (SMSUtil.judgePhoneNums(this, phone) && !TextUtils.isEmpty(code)) {
 //                SMSSDK.submitVerificationCode("86", phone, code)
 //                loginActivityPresenter.loginByphone(phone)
-            }
+//            }
             loginActivityPresenter.loginByphone(phone)
         }
     }
